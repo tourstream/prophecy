@@ -104,7 +104,14 @@ class ClassCodeGenerator
                     case 'callable':
                         $php .= $hint;
                         break;
-
+                    case 'object':
+                        if (version_compare(PHP_VERSION, '7.2', '>=')) {
+                            $php .= $hint;
+                            break;
+                        }
+ 
+                        $php .= '\\'.$hint;
+                        break;
                     case 'iterable':
                         if (version_compare(PHP_VERSION, '7.1', '>=')) {
                             $php .= $hint;
